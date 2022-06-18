@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   #会員側のルーティング設定
 
-
+  resources :items, only: [:index,:show]
   #管理者側のルーティング設定
   namespace :admin do
 

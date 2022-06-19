@@ -12,9 +12,12 @@ Rails.application.routes.draw do
   }
 
   #会員側のルーティング設定
+
   resources :customers, only: [:show, :edit, :update]
 
   resources :items, only: [:index,:show]
+
+
   #管理者側のルーティング設定
   namespace :admin do
   resources :customers, only: [:index, :show, :edit, :update]

@@ -12,7 +12,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :first_name_kana, null: false, default: ""
       t.string :phone_number, null: false, default: ""
       t.string :post_code, null: false, default: ""
-      t.string :aderess, null: false, default: ""
+      t.string :address, null: false, default: ""
       t.boolean :is_deleted , null: false, default: "FALSE"
 
       ## Recoverable

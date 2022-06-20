@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   }
 
   #会員側のルーティング設定
-  
+
   scope module: :public do
     resources :customers do
       collection do

@@ -1,2 +1,25 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+<h2>注文情報入力</h2>
+
+<%= form_with(model: @new_order, local: true) do |f| %>
+  <div>
+    <%= f.label :payment_method, "支払方法"%>
+    <%= f.radio_button :payment_method, :card, checked: true %>
+    <%= f.label :payment_method, "クレジットカード", {value: :card} %>
+    <%= f.radio_button :payment_method, :furikomi %>
+    <%= f.label :payment_method, "銀行振込", {value: :furikomi} %>
+  </div>
+
+  <div>
+    <%= f.label :address, "お届け先"%>
+    <%= f.radio_button :address, :customer, checked: true %>
+    <%= f.label :address, "ご自宅", {value: :customer} %>
+    <%= f.radio_button :address, :other %>
+    <%= f.label :address, "登録先住所から選択", {value: :other} %>
+    <%= f.radio_button :address, :new %>
+    <%= f.label :address, "新しいお届け先", {value: :new} %>
+  </div>
+
+  <div class="submit form-group">
+    <%= f.submit '確認画面に進む', class: "btn btn-success" %>
+  </div>
+<% end %>

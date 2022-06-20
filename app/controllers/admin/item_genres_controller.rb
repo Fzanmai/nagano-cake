@@ -10,19 +10,19 @@ class Admin::ItemGenresController < ApplicationController
   end
 
   def create
-    item_genre = Item_genre.new(item_genre_params)
+    item_genre = ItemGenre.new(item_genre_params)
     item_genre.save
     redirect_to admin_item_genres_path
   end
 
   def update
-    item_genre = Item_genre.find(params[:id])
+    item_genre = ItemGenre.find(params[:id])
     item_genre.update(item_genre_params)
     redirect_to admin_item_genres_path
   end
 
   def destroy
-    item_genre = Item_genre.find(params[:id])
+    item_genre = ItemGenre.find(params[:id])
     item_genre.destroy
     redirect_to  admin_item_genres_path
   end

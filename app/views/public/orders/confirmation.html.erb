@@ -1,2 +1,9 @@
-<h1>Public::Orders#confirmation</h1>
-<p>Find me in app/views/public/orders/confirmation.html.erb</p>
+<h2>注文情報確認</h2>
+<h2>支払い方法</h2>
+<h2>お届け先</h2>
+
+<%= form_with(model: @new_order, local: true) do |f| %>
+  <div class="submit form-group">
+    <%= f.submit '注文を確定する', class: "btn btn-success" %>
+  </div>
+<% end %>

@@ -1,6 +1,23 @@
 <h2>注文情報確認</h2>
+
+<div>
+  <% @cart_items.each do |cart| %>
+    <%= cart.item.name %> <!-- 商品名 -->
+    <%= (cart.item.price).to_s(:delimited) %>　<!-- 金額:税抜 -->
+    <%= cart.quantity %> <!-- 個数 -->
+    <%= (cart.item.price*cart.quantity).to_s(:delimited) %> <!-- 小計 -->
+  <% end %>
+</div>
+
+<div>
+  <%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 -->
+</div>
+
 <h2>支払い方法</h2>
+  <%= @order.payment_method %>
+
 <h2>お届け先</h2>
+  <%= @order.address %>
 
 <%= form_with(model: @new_order, local: true) do |f| %>
   <div class="submit form-group">

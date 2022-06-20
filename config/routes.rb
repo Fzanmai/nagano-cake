@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :orders do
       collection do
         get 'thanx'
+        get 'confirmation'
         post 'confirmation'
       end
     end

@@ -1,26 +1,40 @@
-<h2>注文情報確認</h2>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-12">
 
-<div>
-  <% @cart_items.each do |cart| %>
-    <%= cart.item.name %> <!-- 商品名 -->
-    <%= (cart.item.price).to_s(:delimited) %>　<!-- 金額:税抜 -->
-    <%= cart.quantity %> <!-- 個数 -->
-    <%= (cart.item.price*cart.quantity).to_s(:delimited) %> <!-- 小計 -->
-  <% end %>
-</div>
+      <h2>注文情報確認</h2>
 
-<div>
-  <%= @total.to_s(:delimited) %> <!-- お買い物の合計金額 -->
-</div>
+      <div><!--『cart_items』がないためエラーが起きる。未実装-->
+        <!-- @cart_items.each do |cart| -->
+          <!-- cart.item.name --> <!-- 商品名 -->
+          <!-- (cart.item.price).to_s(:delimited) -->　<!-- 金額:税抜 -->
+          <!-- cart.quantity --> <!-- 個数 -->
+          <!-- (cart.item.price*cart.quantity).to_s(:delimited) --> <!-- 小計 -->
+        <!-- end -->
+      </div>
 
-<h2>支払い方法</h2>
-  <%= @order.payment_method %>
+      <div>
+        <!-- @total.to_s(:delimited) --> <!-- お買い物の合計金額 -->
+      </div>
 
-<h2>お届け先</h2>
-  <%= @order.address %>
+      <h3>支払い方法</h3>
+        <% if @new_order.payment_method == "card" %>
+          <p>クレジットカード</p>
+        <% else %>
+          <p>銀行振込</p>
+        <% end %>
 
-<%= form_with(model: @new_order, local: true) do |f| %>
-  <div class="submit form-group">
-    <%= f.submit '注文を確定する', class: "btn btn-success" %>
+      <h3>お届け先</h3>
+        〒<%= @new_order.postal_code %>
+        <%= @new_order.address %></br>
+        <%= @new_order.name %>
+
+      <%= form_with(model: @new_order, local: true) do |f| %>
+        <div class="submit form-group">
+          <%= f.submit '注文を確定する', class: "btn btn-success" %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
-<% end %>
+</div>

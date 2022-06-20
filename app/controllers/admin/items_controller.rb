@@ -4,6 +4,7 @@ class Admin::ItemsController < ApplicationController
  end
 
  def index
+  
  end
 
  def show

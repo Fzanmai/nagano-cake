@@ -6,6 +6,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def new
+    @new_order = Order.new
+    #@customer = Customer.find(params[:id])
   end
 
   def thanx
@@ -15,5 +17,15 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @new_order = Order.new(order_params)
+    @new_order.save
+    redirect_to thanx_orders_path
   end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:payment_method)
+  end
+
 end

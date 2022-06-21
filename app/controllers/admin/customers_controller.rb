@@ -12,7 +12,16 @@ class Admin::CustomersController < ApplicationController
     if @customer == current_user
       render :edit
     else
-      redirect_to admin_customer_path(current_customer.id)
+      redirect_to customer_path(current_customer.id)
+    end
+  end
+
+  def update
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      redirect_to customer_path(current_customer.id), notice: "You have updated user successfully."
+    else
+      render "customers/edit"
     end
   end
 

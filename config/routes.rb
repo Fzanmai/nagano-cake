@@ -12,11 +12,12 @@ Rails.application.routes.draw do
   }
 
   #会員側のルーティング設定
-  
+
   scope module: :public do
     resources :customers do
       collection do
         get 'unsubscribe'
+        patch 'withdrawal'
       end
     end
     resources :cart_items do

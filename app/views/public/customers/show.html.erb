@@ -1,5 +1,5 @@
 <h2>マイページ</h2>
-  <h4>登録情報</h4>
+  <h4>登録情報</h4><%= link_to '編集する', edit_customer_path(@customer), class: "btn btn-sm btn-success" %>
   <div>
     氏名<%= @customer.last_name %><%= @customer.first_name %>
   </div>

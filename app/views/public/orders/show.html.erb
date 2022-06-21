@@ -1,45 +1,81 @@
-<h2>注文履歴詳細</h2>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-12">
 
-<div>
-  <h3>注文情報</h3>
-  <table>
-    <tr>
-      <th>注文日</th>
-      <td>例:2022/12/12</td>
-    </tr>
-    <tr>
-      <th>配達先</th>
-      <td>例:南緯47度9分西経126度43分太平洋の海底ルルイエ</td>
-    </tr>
-    <tr>
-      <th>支払方法</th>
-      <td>例:銀行振込</td>
-    </tr>
-    <tr>
-      <th>ステータス</th>
-      <td>例:入金確認</td>
-    </tr>
-  </table>
-</div>
+      <h2>注文履歴詳細</h2>
 
-<div>
-  <h3>請求情報</h3>
-  <table>
-    <tr>
-      <th>商品合計</th>
-      <td>例:1,500</td>
-    </tr>
-    <tr>
-      <th>配送料</th>
-      <td>例:800</td>
-    </tr>
-    <tr>
-      <th>ご請求額</th>
-      <td>例:2,300</td>
-    </tr>
-  </table>
-</div>
+        <div  class="d-flex p-2 bd-highlight"><!--注文情報と請求情報を横並びにするためのdiv-->
+          <div>
+            <h3>注文情報</h3>
+            <table class="table-bordered">
+              <tr>
+                <td class="table-secondary">注文日</td>
+                <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+              </tr>
+              <tr>
+                <td class="table-secondary">配達先</td>
+                <td>
+                  〒<%= @order.postal_code %></br>
+                  <%= @order.address %></br>
+                  <%= @order.name %>
+                </td>
+              </tr>
+              <tr>
+                <td class="table-secondary">支払方法</td>
+                <td>
+                  <% if @order.payment_method == "card" %>
+                    クレジットカード
+                  <% else %>
+                    銀行振込
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td class="table-secondary">ステータス</td>
+                <td>例:入金確認</td>
+              </tr>
+          </table>
+        </div>
 
-<div>
-  <h3>注文内容</h3>
+        <div class="ml-4">
+          <h3>請求情報</h3>
+          <table class="table-bordered">
+            <tr>
+              <td class="table-secondary">商品合計</td>
+              <td>例:1,500</td>
+            </tr>
+            <tr>
+              <td class="table-secondary">配送料</td>
+              <td>例:800</td>
+            </tr>
+            <tr>
+              <th class="table-secondary">ご請求額</th>
+              <td>例:2,300</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="mt-4">
+          <h3>注文内容</h3>
+          <table class="table-bordered">
+            <tr class="table-secondary">
+              <th>商品</th>
+              <th>単価(税込)</th>
+              <th>個数</th>
+              <th>小計</th>
+            </tr>
+            <tr>
+              <td>例：いちごのしょーと</td>
+              <td>例：500</td>
+              <td>例：2</td>
+              <td>例：1000</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

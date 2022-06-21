@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :customers do
       collection do
         get 'unsubscribe'
+        patch 'withdrawal'
       end
     end
     resources :cart_items do
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     resources :orders do
       collection do
         get 'thanx'
+        get 'confirmation'
         post 'confirmation'
       end
     end

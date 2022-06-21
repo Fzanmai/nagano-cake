@@ -1,0 +1,70 @@
+<% if @new_order.errors.any? %>
+  <h3><%= @new_order.errors.count %> error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @new_order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h2>注文情報入力</h2>
+
+      <%= form_with(model: @new_order, url: confirmation_orders_path, local: true) do |f| %>
+        <div>
+          <%= f.label :payment_method, "支払方法" %>
+          <div class="form-group">
+            <%= f.radio_button :payment_method, :card, checked: true %>
+            <%= f.label :payment_method, "クレジットカード", {value: :card} %>
+          </div>
+          <div class="form-group">
+            <%= f.radio_button :payment_method, :furikomi %>
+            <%= f.label :payment_method, "銀行振込", {value: :furikomi} %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :address, "お届け先"%>
+          <div class="form-group">
+            <%= f.radio_button :address_num, 1 , checked: true%> <!-- address_number と定義して1～3の番号を check に送ります -->
+            <%= f.label :address_num_1, "ご自宅" %></br>
+            〒<%= current_customer.post_code %>
+            <%= current_customer.address %></br>
+            <%= current_customer.last_name %><%= current_customer.first_name %>
+          </div>
+          <div class="form-group">
+            <%= f.radio_button :address_num, 2 %>
+            <%= f.label :address_num_2, "登録先住所から選択" %></br>
+            <%= f.select :address, [["実家", "実家"], ["友人宅", "友人宅"], ["ドリームランド", "ドリームランド"]], include_blank: "選択して下さい" %>
+            <!-- f.collection_select(:registered, current_customer.addresses.all, :id, :address -->
+          </div>
+          <div class="form-group">
+            <%= f.radio_button :address_num, 3 %>
+            <%= f.label :address_num_3, "新しいお届け先" %>
+              <div>
+                <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+                <%= f.text_field :postal_code, placeholder: "0000000" %>
+              </div>
+              <div>
+                <%= f.label :address, "住所" %>
+                <%= f.text_field :address, placeholder: "〇〇県××市▲▲町1-1" %>
+              </div>
+              <div>
+                <%= f.label :name, "宛名" %>
+                <%= f.text_field :name, placeholder: "田中太郎" %>
+              </div>
+          </div>
+
+        </div>
+
+        <div class="submit form-group">
+          <%= f.submit '確認画面に進む', class: "btn btn-success" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

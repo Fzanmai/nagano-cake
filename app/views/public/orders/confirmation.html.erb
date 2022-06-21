@@ -4,13 +4,42 @@
 
       <h2>注文情報確認</h2>
 
-      <div><!--『cart_items』がないためエラーが起きる。未実装-->
-        <!-- @cart_items.each do |cart| -->
-          <!-- cart.item.name --> <!-- 商品名 -->
-          <!-- (cart.item.price).to_s(:delimited) -->　<!-- 金額:税抜 -->
-          <!-- cart.quantity --> <!-- 個数 -->
-          <!-- (cart.item.price*cart.quantity).to_s(:delimited) --> <!-- 小計 -->
-        <!-- end -->
+      <div class="d-flex bd-highlight"><!--『cart_items』がないためエラーが起きる。未実装-->
+        <table class="table-bordered">
+          <tr class="table-secondary">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+          <!-- @cart_items.each do |cart| -->
+            <tr>
+              <td>例：チョコバナナミルフィーユ</td>
+            <!-- cart.item.name --> <!-- 商品名 -->
+              <td>例:11,000</td>
+            <!-- (cart.item.price).to_s(:delimited) -->　<!-- 金額:税抜 -->
+              <td>例：1</td>
+            <!-- cart.quantity --> <!-- 個数 -->
+              <td>例：11,000</td>
+            <!-- (cart.item.price*cart.quantity).to_s(:delimited) --> <!-- 小計 -->
+            </tr>
+          <!-- end -->
+        </table>
+
+        <table class="table-bordered ml-4">
+            <tr>
+              <td class="table-secondary">送料</td>
+              <td>例：800</td>
+            </tr>
+            <tr>
+              <td class="table-secondary">例：1760</td>
+              <td>例：11,000</td>
+            </tr>
+            <tr>
+              <td class="table-secondary">請求金額</td>
+              <td>例：2560</td>
+            </tr>
+        </table>
       </div>
 
       <div>

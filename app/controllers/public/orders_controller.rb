@@ -1,8 +1,10 @@
 class Public::OrdersController < ApplicationController
   def index
+    @orders = Order.all
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   def new
@@ -32,13 +34,12 @@ class Public::OrdersController < ApplicationController
 
   def create
     @new_order = Order.new(order_params)
-
+    @new_order.customer_id = current_customer.id #customer_idはFKなので必須項目だが、new,confirmationのviewでは設定していないためここで設定。
     if @new_order.save
       redirect_to thanx_orders_path
     else
-      redirect_to new_order_path
+      render :confirmation
     end
-
   end
 
   private

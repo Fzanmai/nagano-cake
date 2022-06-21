@@ -13,14 +13,15 @@
           <th>ステータス</th>
           <th>注文詳細</th>
         </tr>
+        <% @orders.each do |order| %>
         <tr>
           <td>
-            例:2022/02/02
+            <%= order.created_at.strftime('%Y/%m/%d') %>
           </td>
           <td>
-            例：〒1500000</br>
-            例：東京都渋谷区東南町南浦沢ハイツオブライト1234-1234</br>
-            例：山田花子
+            〒<%= order.postal_code %></br>
+            <%= order.address %></br>
+            <%= order.name %>
           </td>
           <td>
             例：いちごショート</br>
@@ -32,10 +33,10 @@
           </td>
           <td>入金確認</td>
           <td>
-            <a class="btn btn-outline-secondary btn-block" href="/orders/show">表示する</a><!--ほんとはurlを『:id』にしなくてはいけない-->
+            <a class="btn btn-outline-secondary btn-block" href="/orders/<%= order.id %>">表示する</a><!--ほんとはurlを『:id』にしなくてはいけない-->
           </td>
         </tr>
-
+        <% end %>
       </table>
 
     </div>

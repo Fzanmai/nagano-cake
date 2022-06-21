@@ -1,3 +1,12 @@
+<% if @new_order.errors.any? %>
+  <h3><%= @new_order.errors.count %> error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @new_order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-12">

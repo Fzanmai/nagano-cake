@@ -1,0 +1,87 @@
+<% if @order.errors.any? %>
+  <h3><%= @order.errors.count %> error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h2>注文履歴一覧</h2>
+
+      <table class="table table-borderless">
+        <tr>
+          <th>購入者</th>
+          <td><%= @order.customer.first_name %></td>
+        </tr>
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>
+            〒<%= @order.postal_code %>
+            <%= @order.address %></br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+            <td>
+              <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
+                <div>
+                  <div><%= f.select :production_status, Order.production_statuses.keys.to_a, {} %></div>
+                  <div class="submit form-group"><%= f.submit '更新' %></div>
+                </div>
+              <% end %>
+            </td>
+        </tr>
+      </table>
+
+      <div class="d-flex bd-highlight">
+        <table class="table-borderless col-md-8">
+          <tr class="table-secondary">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+          </tr>
+          <!-- @order_details.each do |detail| -->
+          <tr>
+            <td>例：洋梨のチーズタルト</td>
+            <td>例：1,320円</td>
+            <td>例：1</td>
+            <td>例：1,320円</td>
+            <td>例：着手不可</td>
+          </tr>
+        </table>
+
+        <table class="align-items-end ml-4 table table-borderless col-md-4">
+          <tr>
+            <th>商品合計</th>
+            <td>例：6,495円</td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td>例：800円</td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td>例：7,290円</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

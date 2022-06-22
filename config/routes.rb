@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   #管理者側のルーティング設定
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :oders, only: [:show, :index, :update]
+    resources :orders, only: [:show, :index, :update]
     resources :order_details, only: [:update]
     resources :items, except: [:destry]
     resources :item_genres, only: [:index, :edit, :update, :create]

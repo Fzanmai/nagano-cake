@@ -7,4 +7,5 @@ class Customer < ApplicationRecord
     super && (is_deleted == false)
   end
   has_many :orders
+  has_many :shipping_addresses, dependent: :destroy
 end

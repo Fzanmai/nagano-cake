@@ -40,4 +40,11 @@ class Public::CustomersController < ApplicationController
     params.require(:customer).permit(:email, :password, :last_name, :first_name, :last_name_kana, :first_name_kana, :phone_number,:post_code, :address, :is_deleted)
   end
 
+  def ensure_correct_customer
+    @customer = Customer.find(params[:id])
+    unless @customer == current_customer
+      redirect_to customer_path(current_customer)
+    end
+  end
+
 end

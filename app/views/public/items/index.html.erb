@@ -1,13 +1,21 @@
-<h3 class="title">商品一覧（全<%= @amount %>件)</h3>
+<div class="container">
 
-<div class="row">
-  <% @items.each do |item| %>
-  <p1><%= image_tag item.get_image(200,200) %></p1>
-  <p2><%= item.name %></p2>
-  <p3>￥<%= item.price.to_s(:delimited) %></p3>
- <% end %>
-</div>
+  <h3 class="title font-weight-bold">商品一覧（全<%= @amount %>件)</h3>
 
-<div>
- <%= paginate @items %>
-</div>
+  <div class="row">
+
+    <% @items.each do |item| %>
+
+    <div class="col-sm-5">
+    <%= image_tag item.get_item_image(200,200) %>
+    <%= link_to item.name,item_path(item.id) %>
+    ￥<%= item.price.to_s(:delimited) %>
+    </div>
+   <% end %>
+    </div>
+       <div class="row">
+       <div class="mx-auto">
+         <%= paginate @items %>
+           </div>
+             </div>
+                </div>

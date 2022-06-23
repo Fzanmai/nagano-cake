@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :customers do
       collection do
         get 'unsubscribe'
+        get "check"
         patch 'withdrawal'
       end
     end

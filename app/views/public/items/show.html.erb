@@ -10,9 +10,9 @@
  	<h4><strong><%= @item.name %></strong></h4><br>
  	<p><%= @item.introduction %></p><br>
  	 <p><strong>￥<%= @item.add_tax_price.to_s(:delimited) %>円</strong>(税込)</p><br>
- 	 <%= form_with model: @cart_items, url: cart_items_path, method: :post do |f| %>
+ 	 <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
  	 <%= f.hidden_field :item_id, :value => @item.id %>
- 	 <p><%= f.select :amount, *[1..10], prompt: "個数選択" %><p/>
+ 	 <p><%= f.select :quantity, *[1..10], prompt: "個数選択" %><p/>
  	 <p><%= f.submit 'カートに入れる',class: " btn btn-success" %><p/>
    <% end %>
 

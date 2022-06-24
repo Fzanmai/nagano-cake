@@ -5,11 +5,10 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum is_active: {Available: true, Invalid: false}
+   has_many :orders
+   has_many :shipping_addresses, dependent: :destroy
 
-  def active_for_authentication?
-    super && (self.is_active === "Available")
-  end
-  has_many :orders
-  has_many :shipping_addresses, dependent: :destroy
+   def active_for_authentication?
+    super && (is_deleted == false)
+   end
 end

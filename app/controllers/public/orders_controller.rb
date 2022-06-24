@@ -37,7 +37,14 @@ class Public::OrdersController < ApplicationController
   def create
     @new_order = Order.new(order_params)
     @new_order.customer_id = current_customer.id #customer_idはFKなので必須項目だが、new,confirmationのviewでは設定していないためここで設定。
+    #cart_items = current_customer.cart_items.all
     if @new_order.save
+      #cart_items.each do |cart|
+        #order_detail = OrderDetail.new
+        #order_detail.item_id = cart.item_id
+        #order_detail.order_id = @order.id
+        #order_detail.order_quantity = cart.quantity
+      #end
       redirect_to thanx_orders_path
     else
       render :confirmation

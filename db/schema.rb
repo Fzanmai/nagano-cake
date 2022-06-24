@@ -92,8 +92,9 @@ ActiveRecord::Schema.define(version: 2022_06_23_050326) do
     t.string "name"
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active"
     t.integer "genre_id"
+    t.boolean "is_active", default: true
+    t.integer "item_genre_id"
   end
 
   create_table "order_details", force: :cascade do |t|

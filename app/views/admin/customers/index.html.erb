@@ -1,7 +1,7 @@
-<p>会員一覧</p>
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
+<div class="container px-5 px-sm-0 mt-5">
+  <div class="row">
+    <div class="col-md-12">
+     <h4>会員一覧</h4>
       <table class='table table-hover table-inverse'>
         <thead>
           <tr>
@@ -15,14 +15,19 @@
        <tbody>
          <% @customers.each do |customer| %>
            <tr>
+             <td><%= customer.id %></td>
+             <td><%= link_to "#{customer.last_name}#{customer.first_name}", admin_customer_path(customer.id) %></td>
+             <td><%= customer.email %></td>
              <td>
+               <% if customer.is_deleted? %>
+               <span class="text-active">退会</span>
+               <% else %>
+               <span class="text-invalid text-success">有効</span>
+               <% end %>
              </td>
-             <td><%= link_to customer.name, class: "book_#{book.id}" %></td>
-             <td><%= customers.email %></td>
-             <td></td>
          <% end %>
-       </tbody>
+        </tbody>
       </table>
-   </div>
+    </div>
   </div>
- </div>
+</div>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :customers do
       collection do
         get 'unsubscribe'
+        get "check"
         patch 'withdrawal'
       end
     end
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
     resources :shipping_addresses
     root to: "homes#top"
     get '/home/about' => 'homes#about', as: 'about'
+
+    get '/search', to: 'searches#search'
   end
 
   #管理者側のルーティング設定

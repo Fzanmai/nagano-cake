@@ -21,4 +21,16 @@ class Item < ApplicationRecord
     item_image.variant(resize_to_limit: [width, height]).processed
  end
 
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Item.where(name: content)
+    elsif method == 'forward'
+      Item.where('name LIKE ?', content+'%')
+    elsif method == 'backward'
+      Item.where('name LIKE ?', '%'+content)
+    else
+      Item.where('name LIKE ?', '%'+content+'%')
+    end
+  end
+
 end

@@ -56,11 +56,7 @@
       </div>
 
       <h3>支払い方法</h3>
-        <% if @new_order.payment_method == "card" %>
-          クレジットカード
-        <% else %>
-          銀行振込
-        <% end %>
+        <%= @new_order.payment_method %>
 
       <h3>お届け先</h3>
         〒<%= @new_order.postal_code %>

@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-
-  end
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -12,10 +9,12 @@ Rails.application.routes.draw do
   }
 
   #会員側のルーティング設定
+
   scope module: :public do
     resources :customers do
       collection do
         get 'unsubscribe'
+        patch 'withdrawal'
       end
     end
     resources :cart_items do
@@ -26,6 +25,7 @@ Rails.application.routes.draw do
     resources :orders do
       collection do
         get 'thanx'
+        get 'confirmation'
         post 'confirmation'
       end
     end
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   #管理者側のルーティング設定
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :oders, only: [:show, :index, :update]
+    resources :orders, only: [:show, :index, :update]
     resources :order_details, only: [:update]
     resources :items, except: [:destry]
     resources :item_genres, only: [:index, :edit, :update, :create]

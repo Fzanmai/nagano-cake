@@ -1,1 +1,44 @@
-<h2>注文情報入力</h2>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h2>注文履歴一覧</h2>
+
+      <table class="table-bordered col-md-12">
+        <tr class="table-secondary">
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+        </tr>
+        <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%= order.created_at.strftime('%Y/%m/%d') %>
+          </td>
+          <td>
+            〒<%= order.postal_code %></br>
+            <%= order.address %></br>
+            <%= order.name %>
+          </td>
+          <td>
+            例：いちごショート</br>
+            例：ケーキ</br>
+            例：ガトーショコラ</br>
+          </td>
+          <td>
+            例：2,300円
+          </td>
+          <td>入金確認</td>
+          <td>
+            <a class="btn btn-outline-secondary btn-block" href="/orders/<%= order.id %>">表示する</a><!--ほんとはurlを『:id』にしなくてはいけない-->
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <%= paginate @orders %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+
+<p id="notice"></p>
+<div class='container'>
+<div class='row'>
+<div class="col-sm-12 col-md-8 col-lg-8 px-6 px-sm-6 mx-auto">
+  <h2>商品新規登録</h2>
+
+ <% if @item.errors.any? %>
+   <%= @item.errors.count %>件のエラーが発生しました
+   <ul>
+   <% @item.errors.full_messages.each do |message| %>
+   <li><%= message %></li>
+   <% end %>
+   </ul>
+ <% end %>
+
+<%= form_with model: @item,url: admin_items_path, method: :post, local: :true do |f| %>
+  <div class="form-group">
+  <strong><%= f.label :"商品画像", class: "col-sm-3 control-label" %></strong>
+  <%= f.file_field :item_image, class: "image" %>
+  </div>
+
+  <div class="form-group">
+  <strong><%= f.label :"商品名", class: "col-sm-3 control-label" %></strong>
+  <%= f.text_field :name,placeholder: "商品名", class: "col-sm-5 form-control-static name" %>
+  </div>
+
+  <div class="form-group">
+  <strong><%= f.label :"商品説明", class: "col-sm-3 control-label" %></strong>
+  <%= f.text_area :introduction,:rows => "8",placeholder: "ここに説明文を記述します", class: "col-sm-5 control-label introduction" %>
+  </div>
+
+  <div class="form-group">
+  <strong><%= f.label :"ジャンル", class: "col-sm-3 control-label" %></strong>
+  <%= f.collection_select(:item_genre_id, ItemGenre.all, :id, :name, prompt: "-- 選択してください --", class: "col-sm-5 control-label genre_id") %>
+  </div>
+
+ <div class="form-group">
+  <strong><%= f.label :"税抜価格", class: "col-sm-3 control-label" %></strong>
+  <%= f.text_field :price,placeholder: "1000", class: "col-sm-5 form-control-static price" %>円
+  </div>
+
+ <div class="form-group">
+ <%= f.radio_button :is_active, true %>
+  <strong><%= f.label :is_active, "販売中", class: "cotext-active" %></strong>
+ <%= f.radio_button :is_active, false %>
+  <strong><%= f.label :is_active, "販売停止中", class: "text-invalid" %></strong>
+ </div>
+
+  <div class="text-center">
+  <%= f.submit "新規登録", class: "btn btn-success" %>
+  </div>
+
+  <%= link_to "back", admin_items_path %>
+
+<% end %>
+</div>
+</div>
+</div>
+

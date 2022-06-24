@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_19_081456) do
+ActiveRecord::Schema.define(version: 2022_06_22_064341) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_06_19_081456) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "password", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -54,14 +54,14 @@ ActiveRecord::Schema.define(version: 2022_06_19_081456) do
 
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "password", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
     t.string "phone_number", default: "", null: false
     t.string "post_code", default: "", null: false
-    t.string "aderess", default: "", null: false
+    t.string "address", default: "", null: false
     t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -72,14 +72,20 @@ ActiveRecord::Schema.define(version: 2022_06_19_081456) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "item_genres", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+  end
+
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active"
-    t.integer "genre_id"
+    t.boolean "is_active", default: true
+    t.integer "item_genre_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -93,6 +99,15 @@ ActiveRecord::Schema.define(version: 2022_06_19_081456) do
     t.integer "billing_amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.string "post_code", default: "", null: false
+    t.string "address", default: "", null: false
+    t.string "name", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

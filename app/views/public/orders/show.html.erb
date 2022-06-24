@@ -23,11 +23,7 @@
               <tr>
                 <td class="table-secondary">支払方法</td>
                 <td>
-                  <% if @order.payment_method == "card" %>
-                    クレジットカード
-                  <% else %>
-                    銀行振込
-                  <% end %>
+                  <%= @order.payment_method %>
                 </td>
               </tr>
               <tr>

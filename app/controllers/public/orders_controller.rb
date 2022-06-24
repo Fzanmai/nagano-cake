@@ -1,6 +1,6 @@
 class Public::OrdersController < ApplicationController
   def index
-    @orders = Order.all.page(params[:page]).per(10)
+    @orders = Order.where(customer_id: current_customer.id).page(params[:page]).per(10)
   end
 
   def show
@@ -9,7 +9,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @new_order = Order.new
-    #@customer = Customer.find(params[:id])
+    @shipping_addresses = ShippingAddress.where(customer_id: current_customer.id)
   end
 
   def thanx
@@ -22,11 +22,13 @@ class Public::OrdersController < ApplicationController
     if params[:order][:address_num] == "1"
       @new_order.postal_code = current_customer.post_code
       @new_order.address = current_customer.address
-      @new_order.name = current_customer.first_name
-    elsif params[:order][:address_number] == "2"
-      @new_order.postal_code = "1111234"
-      @new_order.name = "配送先の宛名"
-    elsif params[:order][:address_number] == "3"
+      @new_order.name = current_customer.last_and_first_name
+    elsif params[:order][:address_num] == "2"
+      @shipping_addresses_id = ShippingAddress.find(params[:order][:registered_addresses])
+      @new_order.postal_code = @shipping_addresses_id.post_code
+      @new_order.address = @shipping_addresses_id.address
+      @new_order.name = @shipping_addresses_id.name
+    elsif params[:order][:address_num] == "3"
     end
 
     #@cart_items = current_customer.cart_items.all
@@ -35,7 +37,14 @@ class Public::OrdersController < ApplicationController
   def create
     @new_order = Order.new(order_params)
     @new_order.customer_id = current_customer.id #customer_idはFKなので必須項目だが、new,confirmationのviewでは設定していないためここで設定。
+    #cart_items = current_customer.cart_items.all
     if @new_order.save
+      #cart_items.each do |cart|
+        #order_detail = OrderDetail.new
+        #order_detail.item_id = cart.item_id
+        #order_detail.order_id = @order.id
+        #order_detail.order_quantity = cart.quantity
+      #end
       redirect_to thanx_orders_path
     else
       render :confirmation

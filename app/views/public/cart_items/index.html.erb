@@ -1,4 +1,4 @@
-<h1>ショッピングカート</h1>
+<h4>ショッピングカート</h4>
 <table>
   <tr>
     <th>
@@ -17,23 +17,23 @@
     </th>
   </tr>
   <% @cart_items.each do |cart_item| %>
-  <tr>
-    <td>
-      <% cart_item.item.name %>
-    </td>
-    <td>
-      <%= cart_item.item.add_tax_price %>
-    </td>
-    <td>
+    <tr>
+      <td>
+        <%= cart_item.item.name %>
+      </td>
+      <td>
+        <%= cart_item.item.add_tax_price %>
+      </td>
+      <td>
+        <%= cart_item.quantity %>
+      </td>
+      <td>
+        <%= cart_item.subtotal %>
+      </td>
+      <td>
 
-    </td>
-    <td>
-      <%= cart_item.subtotal %>
-    </td>
-    <% @合計金額 +=  cart_item.subtotal %>
-    <td>
-
-    </td>
-  </tr>
-  <% end %>
+      </td>
+    </tr>
+   <% end %>
 </table>
+<%= @total.round.to_s(:delimited) %>

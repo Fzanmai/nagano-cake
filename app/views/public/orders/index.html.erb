@@ -14,28 +14,30 @@
           <th>注文詳細</th>
         </tr>
         <% @orders.each do |order| %>
-        <tr>
-          <td>
-            <%= order.created_at.strftime('%Y/%m/%d') %>
-          </td>
-          <td>
-            〒<%= order.postal_code %></br>
-            <%= order.address %></br>
-            <%= order.name %>
-          </td>
-          <td>
-            例：いちごショート</br>
-            例：ケーキ</br>
-            例：ガトーショコラ</br>
-          </td>
-          <td>
-            例：2,300円
-          </td>
-          <td>入金確認</td>
-          <td>
-            <a class="btn btn-outline-secondary btn-block" href="/orders/<%= order.id %>">表示する</a><!--ほんとはurlを『:id』にしなくてはいけない-->
-          </td>
-        </tr>
+          <% @order_details = order.order_details %>
+          <tr>
+            <td>
+              <%= order.created_at.strftime('%Y/%m/%d') %>
+            </td>
+            <td>
+              〒<%= order.postal_code %></br>
+              <%= order.address %></br>
+              <%= order.name %>
+            </td>
+            <td>
+              <% @order_details.each do |order_detail| %>
+                <%= order_detail.item.name %></br>
+              <% end %>
+            </td>
+            <td>
+              <% @total = @order_details.inject(0) { |sum, order_detail| sum + order_detail.total } %>
+              <%= @total.round.to_s(:delimited) %>円
+            </td>
+            <td><%= order.production_status_i18n %></td>
+            <td>
+              <a class="btn btn-outline-secondary btn-block" href="/orders/<%= order.id %>">表示する</a><!--ほんとはurlを『:id』にしなくてはいけない-->
+            </td>
+          </tr>
         <% end %>
       </table>
       <%= paginate @orders %>

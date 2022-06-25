@@ -2,6 +2,7 @@ require_relative "boot"
 
 require "rails/all"
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -11,6 +12,8 @@ module WorkGithub
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.i18n.default_locale = :ja  #デフォルト言語を日本語に設定
+    config.i18n.fallbacks =[:en]      #翻訳内容が見つからない場合に英語で表示する設定
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

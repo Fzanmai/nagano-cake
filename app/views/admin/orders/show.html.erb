@@ -16,7 +16,7 @@
       <table class="table table-borderless">
         <tr>
           <th>購入者</th>
-          <td><%= @order.customer.first_name %></td>
+          <td><%= @order.customer.last_and_first_name %></td>
         </tr>
         <tr>
           <th>注文日</th>
@@ -32,14 +32,14 @@
         </tr>
         <tr>
           <th>支払方法</th>
-          <td><%= @order.payment_method %></td>
+          <td><%= @order.payment_method_i18n %></td>
         </tr>
         <tr>
           <th>注文ステータス</th>
             <td>
               <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
                 <div>
-                  <div><%= f.select :production_status, Order.production_statuses.keys.to_a, {} %></div>
+                  <div><%= f.select :production_status, Order.production_statuses_i18n.invert, {} %></div>
                   <div class="submit form-group"><%= f.submit '更新' %></div>
                 </div>
               <% end %>
@@ -55,29 +55,39 @@
             <th>数量</th>
             <th>小計</th>
             <th>制作ステータス</th>
+            <th></th>
           </tr>
-          <!-- @order_details.each do |detail| -->
+          <% @order_details.each do |order_detail| %>
           <tr>
-            <td>例：洋梨のチーズタルト</td>
-            <td>例：1,320円</td>
-            <td>例：1</td>
-            <td>例：1,320円</td>
-            <td>例：着手不可</td>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.price %></td>
+            <td><%= order_detail.quantity %></td>
+            <td><%= order_detail.subtotal %></td>
+            <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
+              <td>
+                <%= f.select :order_status, OrderDetail.order_statuses_i18n.invert, {} %>
+                <%= f.hidden_field :order_id, :value => order_detail.order_id %>
+              </td>
+              <td class="submit form-group">
+                <%= f.submit '更新' %>
+              </td>
+            <% end %>
           </tr>
+          <% end %>
         </table>
 
         <table class="align-items-end ml-4 table table-borderless col-md-4">
           <tr>
-            <th>商品合計</th>
-            <td>例：6,495円</td>
+            <td class="table-secondary">商品合計</td>
+            <td><%= @total.round.to_s(:delimited) %>円</td>
           </tr>
           <tr>
-            <th>送料</th>
-            <td>例：800円</td>
+            <td class="table-secondary">配送料</td>
+            <td>800円</td>
           </tr>
           <tr>
-            <th>請求金額合計</th>
-            <td>例：7,290円</td>
+            <th class="table-secondary">ご請求額</th>
+            <td><%= (@total + 800).round.to_s(:delimited) %>円</td>
           </tr>
         </table>
       </div>

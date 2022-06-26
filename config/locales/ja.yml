@@ -1,0 +1,18 @@
+ja:
+  enums:
+    order:
+      payment_method:
+        card: クレジットカード
+        furikomi: 銀行振込
+      production_status:
+        on_payment: 入金待ち
+        paid: 入金済み
+        under_manufacture: 製作待ち
+        on_shipping: 配送準備中
+        shipped: 配送済み
+    order_detail:
+      order_status:
+        not_possible: 着手不可
+        awaiting_manufacture: 製作待ち
+        under_manufacture: 製作中
+        finish: 製作完了

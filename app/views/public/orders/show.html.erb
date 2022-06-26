@@ -23,16 +23,12 @@
               <tr>
                 <td class="table-secondary">支払方法</td>
                 <td>
-                  <% if @order.payment_method == "card" %>
-                    クレジットカード
-                  <% else %>
-                    銀行振込
-                  <% end %>
+                  <%= @order.payment_method_i18n %>
                 </td>
               </tr>
               <tr>
                 <td class="table-secondary">ステータス</td>
-                <td>例:入金確認</td>
+                <td><%= @order.production_status_i18n %></td>
               </tr>
           </table>
         </div>
@@ -42,15 +38,15 @@
           <table class="table-bordered">
             <tr>
               <td class="table-secondary">商品合計</td>
-              <td>例:1,500</td>
+              <td><%= @total.round.to_s(:delimited) %></td>
             </tr>
             <tr>
               <td class="table-secondary">配送料</td>
-              <td>例:800</td>
+              <td>800</td>
             </tr>
             <tr>
               <th class="table-secondary">ご請求額</th>
-              <td>例:2,300</td>
+              <td><%= (@total + 800).round.to_s(:delimited) %></td>
             </tr>
           </table>
         </div>
@@ -59,19 +55,21 @@
       <div class="p-2">
         <div class="mt-4">
           <h3>注文内容</h3>
-          <table class="table-bordered">
+          <table class="table-bordered col-md-6">
             <tr class="table-secondary">
               <th>商品</th>
               <th>単価(税込)</th>
               <th>個数</th>
               <th>小計</th>
             </tr>
-            <tr>
-              <td>例：いちごのしょーと</td>
-              <td>例：500</td>
-              <td>例：2</td>
-              <td>例：1000</td>
-            </tr>
+            <% @order_details.each do |order_detail| %>
+              <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.price.round.to_s(:delimited) %></td>
+                <td><%= order_detail.quantity %></td>
+                <td><%= order_detail.subtotal.round.to_s(:delimited) %></td>
+              </tr>
+            <% end %>
           </table>
         </div>
       </div>

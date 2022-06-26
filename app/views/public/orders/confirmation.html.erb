@@ -13,7 +13,7 @@
 
       <h2>注文情報確認</h2>
 
-      <div class="d-flex bd-highlight"><!--『cart_items』がないためエラーが起きる。未実装-->
+      <div class="d-flex bd-highlight">
         <table class="table-bordered">
           <tr class="table-secondary">
             <th>商品名</th>
@@ -21,32 +21,28 @@
             <th>数量</th>
             <th>小計</th>
           </tr>
-          <!-- @cart_items.each do |cart| -->
+          <% @cart_items.each do |cart| %>
             <tr>
-              <td>例：チョコバナナミルフィーユ</td>
-            <!-- cart.item.name --> <!-- 商品名 -->
-              <td>例:11,000</td>
-            <!-- (cart.item.price).to_s(:delimited) -->　<!-- 金額:税抜 -->
-              <td>例：1</td>
-            <!-- cart.quantity --> <!-- 個数 -->
-              <td>例：11,000</td>
-            <!-- (cart.item.price*cart.quantity).to_s(:delimited) --> <!-- 小計 -->
+              <td><%= cart.item.name %></td>
+              <td><%= cart.item.price %></td>
+              <td><%= cart.quantity %></td>
+              <td><%= (cart.item.price*cart.quantity) %></td>
             </tr>
-          <!-- end -->
+          <% end %>
         </table>
 
         <table class="table-bordered ml-4">
             <tr>
               <td class="table-secondary">送料</td>
-              <td>例：800</td>
+              <td>800</td>
             </tr>
             <tr>
-              <td class="table-secondary">例：1760</td>
-              <td>例：11,000</td>
+              <td class="table-secondary">商品合計</td>
+              <td><%= @total.round.to_s(:delimited) %></td>
             </tr>
             <tr>
               <td class="table-secondary">請求金額</td>
-              <td>例：2560</td>
+              <td><%= (@total + 800).round.to_s(:delimited) %></td>
             </tr>
         </table>
       </div>
@@ -56,11 +52,7 @@
       </div>
 
       <h3>支払い方法</h3>
-        <% if @new_order.payment_method == "card" %>
-          クレジットカード
-        <% else %>
-          銀行振込
-        <% end %>
+        <%= @new_order.payment_method %>
 
       <h3>お届け先</h3>
         〒<%= @new_order.postal_code %>

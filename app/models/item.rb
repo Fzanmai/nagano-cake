@@ -4,6 +4,7 @@ class Item < ApplicationRecord
 
     has_many :cart_items
     belongs_to :item_genre
+    has_many :orders, through: :order_details
 
     def add_tax_price
     (self.price * 1.1).round

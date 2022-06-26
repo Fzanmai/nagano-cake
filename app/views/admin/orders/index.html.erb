@@ -12,14 +12,18 @@
           <th>注文ステータス</th>
         </tr>
         <% @orders.each do |order| %>
-        <tr>
-          <td>
-            <a href="/admin/orders/<%= order.id %>"><%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></a>
-          </td>
-          <td><%= order.customer.first_name %></td>
-          <td>例：注文個数</td>
-          <td><%= order.production_status %></td>
-        </tr>
+          <% @order_details = order.order_details %>
+          <tr>
+            <td>
+              <a href="/admin/orders/<%= order.id %>"><%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></a>
+            </td>
+            <td><%= order.customer.last_and_first_name %></td>
+            <td>
+              <% @total_quantity = @order_details.inject(0) { |sum, order_detail| sum + order_detail.quantity } %>
+              <%= @total_quantity.round.to_s(:delimited) %>
+            </td>
+            <td><%= order.production_status_i18n %></td>
+          </tr>
         <% end %>
       </table>
       <%= paginate @orders %>

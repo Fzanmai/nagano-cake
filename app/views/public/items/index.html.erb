@@ -4,8 +4,10 @@
 
     <% @items.each do |item| %>
      <div class="col-sm-5">
-      <%= image_tag item.get_item_image(200,200) %>
-      <%= link_to item.name,item_path(item.id) %>
+      <%= link_to item_path(item.id) do %>
+       <%= image_tag item.get_item_image(200,200) %>
+       <%= item.name %>
+      <% end %>
       ￥<%= item.price.to_s(:delimited) %>
      </div>
     <% end %>

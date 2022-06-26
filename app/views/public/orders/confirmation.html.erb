@@ -24,9 +24,9 @@
           <% @cart_items.each do |cart| %>
             <tr>
               <td><%= cart.item.name %></td>
-              <td><%= cart.item.price %></td>
+              <td><%= cart.item.add_tax_price.to_s(:delimited) %></td>
               <td><%= cart.quantity %></td>
-              <td><%= (cart.item.price*cart.quantity) %></td>
+              <td><%= (cart.item.price*cart.quantity).to_s(:delimited) %></td>
             </tr>
           <% end %>
         </table>
@@ -52,7 +52,7 @@
       </div>
 
       <h3>支払い方法</h3>
-        <%= @new_order.payment_method %>
+        <%= @new_order.payment_method_i18n %>
 
       <h3>お届け先</h3>
         〒<%= @new_order.postal_code %>

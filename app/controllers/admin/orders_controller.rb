@@ -12,6 +12,10 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.update(order_params)
+    if @order.production_status == "paid"
+      @order_details = @order.order_details
+      @order_details.update(order_status: "awaiting_manufacture")
+    end
     redirect_to admin_order_path(@order.id)
   end
 
@@ -20,4 +24,5 @@ class Admin::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:production_status)
   end
+
 end

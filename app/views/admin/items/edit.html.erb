@@ -1,31 +1,49 @@
+<p id="notice"></p>
+<div class='container'>
+<div class='row'>
+<div class="col-sm-12 col-md-8 col-lg-8 px-6 px-sm-6 mx-auto">
  <h2>商品編集</h2>
 
  <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
 
- <table class="table">
- <tr><th>商品画像</th><td><%= f.file_field :item_image, accept: "image/*" %></td></tr>
+ <div class="form-group">
+  <strong><%= f.label :"商品画像", class: "col-sm-3 control-label" %></strong>
+  <%= f.file_field :item_image, class: "image" %>
 
- <tr><th>商品名</th><td><%= f.text_field :name, placefolder: "商品名" %></td></tr>
+ <div class="form-group">
+  <strong><%= f.label :"商品名", class: "col-sm-3 control-label" %></strong>
+  <%= f.text_field :name,placeholder: "商品名", class: "col-sm-5 form-control-static name" %>
+  </div>
 
- <tr><th>商品説明</th><td><%= f.text_area :introduction, placefolder: "ここに説明文を記述します" %></td></tr>
+ <div class="form-group">
+  <strong><%= f.label :"商品説明", class: "col-sm-3 control-label" %></strong>
+  <%= f.text_area :introduction,:rows => "8",placeholder: "ここに説明文を記述します", class: "col-sm-5 control-label introduction" %>
+  </div>
 
- <tr><th>ジャンル</th><td><%= f.collection_select(:item_genre_id, @item_genres, :id, :name) %></td></tr>
+  <div class="form-group">
+  <strong><%= f.label :"ジャンル", class: "col-sm-3 control-label" %></strong>
+  <%= f.collection_select(:item_genre_id, ItemGenre.all, :id, :name, prompt: "-- 選択してください --", class: "col-sm-5 control-label genre_id") %>
+  </div>
 
- <tr><th>税抜価格</th><td><%= f.text_field :price %>円</td></tr>
+  <div class="form-group">
+  <strong><%= f.label :"税抜価格", class: "col-sm-3 control-label" %></strong>
+  <%= f.text_field :price,placeholder: "1000", class: "col-sm-5 form-control-static price" %>円
+  </div>
 
- <tr><th>販売ステータス</th>
-  <td>
-<%= f.radio_button :is_active, true %>
-<%= f.label :is_active, "販売中", class: "text-active" %>
-<%= f.radio_button :is_active, false %>
-<%= f.label :is_active, "販売停止中", class: "text-invalid" %>
-  </td>
- </tr>
-</table>
+  <div class="form-group">
+   <strong><%= f.label :"ステータス", class: "col-sm-3 control-label" %></strong>
+   <%= f.radio_button :is_active, true %>
+   <strong><%= f.label :is_active, "販売中", class: "col-sm-3 control-label text-active text-success" %></strong>
+   <%= f.radio_button :is_active, false %>
+   <strong><%= f.label :is_active, "販売停止中", class: "col-sm-3 control-label text-invalid text-secondary" %></strong>
+  </div>
 
-<%= link_to "Destroy", admin_item_path(@item),method: :delete,"data-confirm"=>"Are you sure?" ,class:"btn btn-danger" %>
-
-<%= f.submit "Create", class: "btn btn-success" %>
-
+  <div class="text-center">
+  <%= link_to "Destroy", admin_item_path(@item),method: :delete,"data-confirm"=>"Are you sure?" ,class:"btn btn-danger" %>
+  <%= f.submit "Create", class: "btn btn-success" %>
+  </div>
 <% end %>
+ </div>
+ </div>
+ </div>
 

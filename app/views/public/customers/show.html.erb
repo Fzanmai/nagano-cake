@@ -1,41 +1,24 @@
-  <h4 class= "mt-5 ml-4">マイページ</h4>
-    <div class="col-5 ml-5">
-      <div class="form-inline" >
-        <h5 class = "mr-3">登録情報</h5>
-        <p><%= link_to '編集する', edit_customer_path(@customer), class: "btn btn-sm btn-success" %></p>
-      </div>
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <td>氏名</td>
-                    <td><%= @customer.last_name %><%= @customer.first_name %></td>
-                </tr>
-                <tr>
-                    <td>フリガナ</td>
-                    <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
-                </tr>
-                <tr>
-                    <td>郵便番号</td>
-                    <td><%= @customer.post_code %></td>
-                </tr>
-                <tr>
-                    <td>住所</td>
-                    <td><%= @customer.address %></td>
-                </tr>
-                <tr>
-                    <td>電話番号</td>
-                    <td><%= @customer.phone_number %></td>
-                </tr>
-                <tr>
-                    <td>メールアドレス</td>
-                    <td><%= @customer.email %></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="form-inline mt4" >
-          <h5 class = "mr-4">配送先</h5><%= link_to '一覧を見る', shipping_addresses_path(@customer), class: "btn btn-sm btn-info" %>
-        </div>
-        <div class="form-inline mt-4" ><br>
-          <h5 class = "mr-3">注文履歴</h5><%= link_to '一覧を見る', orders_path(@order), class: "btn btn-sm btn-info" %>
-        </div>
-    </div>
+<h2>マイページ</h2>
+  <h4>登録情報</h4><%= link_to '編集する', edit_customer_path(@customer), class: "btn btn-sm btn-success" %>
+  <div>
+    氏名<%= @customer.last_name %><%= @customer.first_name %>
+  </div>
+  <div>
+    カナ<%= @customer.last_name_kana %><%= @customer.first_name_kana %>
+  </div>
+  <div>
+    郵便番号<%= @customer.post_code %>
+  </div>
+  <div>
+    住所<%= @customer.address %>
+  </div>
+  <div>
+    電話番号<%= @customer.phone_number %>
+  </div>
+  <div>
+    メールアドレス<%= @customer.email %>
+  </div>
+
+
+<h4>配送先</h4>
+<h4>注文履歴</h4>

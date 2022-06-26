@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 2022_06_23_050326) do
     t.integer "item_genre_id"
   end
 
+  create_table "order_details", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "price"
+    t.integer "quantity"
+    t.integer "order_id"
+    t.integer "order_status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
     t.string "address"

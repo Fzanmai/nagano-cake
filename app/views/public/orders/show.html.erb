@@ -1,19 +1,19 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mt-5">
 
       <h2>注文履歴詳細</h2>
 
         <div  class="d-flex p-2 bd-highlight"><!--注文情報と請求情報を横並びにするためのdiv-->
-          <div>
-            <h3>注文情報</h3>
-            <table class="table-bordered">
+          <div class="col-5">
+            <h4>注文情報</h4>
+            <table class="table-bordered col-12">
               <tr>
-                <td class="table-secondary">注文日</td>
+                <td class="table-secondary pt-2 pb-2">注文日</td>
                 <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
               </tr>
               <tr>
-                <td class="table-secondary">配達先</td>
+                <td class="table-secondary pt-2 pb-2">配達先</td>
                 <td>
                   〒<%= @order.postal_code %></br>
                   <%= @order.address %></br>
@@ -21,40 +21,40 @@
                 </td>
               </tr>
               <tr>
-                <td class="table-secondary">支払方法</td>
+                <td class="table-secondary pt-2 pb-2">支払方法</td>
                 <td>
                   <%= @order.payment_method_i18n %>
                 </td>
               </tr>
               <tr>
-                <td class="table-secondary">ステータス</td>
+                <td class="table-secondary pt-2 pb-2">ステータス</td>
                 <td><%= @order.production_status_i18n %></td>
               </tr>
           </table>
         </div>
 
         <div class="ml-4">
-          <h3>請求情報</h3>
+          <h4>請求情報</h4>
           <table class="table-bordered">
             <tr>
-              <td class="table-secondary">商品合計</td>
-              <td><%= @total.round.to_s(:delimited) %></td>
+              <td class="table-secondary pr-5 pt-2 pb-2">商品合計</td>
+              <td class="pr-5"><%= @total.round.to_s(:delimited) %></td>
             </tr>
             <tr>
-              <td class="table-secondary">配送料</td>
+              <td class="table-secondary pt-2 pb-2">配送料</td>
               <td>800</td>
             </tr>
             <tr>
-              <th class="table-secondary">ご請求額</th>
+              <th class="table-secondary pt-2 pb-2">ご請求額</th>
               <td><%= (@total + 800).round.to_s(:delimited) %></td>
             </tr>
           </table>
         </div>
       </div>
 
-      <div class="p-2">
+      <div class="p-4">
         <div class="mt-4">
-          <h3>注文内容</h3>
+          <h4>注文内容</h4>
           <table class="table-bordered col-md-6">
             <tr class="table-secondary">
               <th>商品</th>
@@ -64,10 +64,10 @@
             </tr>
             <% @order_details.each do |order_detail| %>
               <tr>
-                <td><%= order_detail.item.name %></td>
-                <td><%= order_detail.price.round.to_s(:delimited) %></td>
-                <td><%= order_detail.quantity %></td>
-                <td><%= order_detail.subtotal.round.to_s(:delimited) %></td>
+                <td class="pt-2 pb-2"><%= order_detail.item.name %></td>
+                <td class="pt-2 pb-2"><%= order_detail.price.round.to_s(:delimited) %></td>
+                <td class="pt-2 pb-2"><%= order_detail.quantity %></td>
+                <td class="pt-2 pb-2"><%= order_detail.subtotal.round.to_s(:delimited) %></td>
               </tr>
             <% end %>
           </table>

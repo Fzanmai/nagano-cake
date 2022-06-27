@@ -1,29 +1,25 @@
-<div class="container px-5 px-sm-0">
-  <div class="row">
-    <div class="col-md-12 mt-5">
+<div class="jumbotron">
+   <h3 class="title font-weight-bold">商品一覧（全<%= @amount %>件)</h3>
 
-      <div class="container">
-        <h3 class="title font-weight-bold mb-5">商品一覧（全<%= @amount %>件)</h3>
-        <div class="row">
-          <% @items.each do |item| %>
-            <div class="col-sm-5">
-              <%= link_to item_path(item.id),  {class: "text-decoration: none;"} do %>
-                <%= image_tag item.get_item_image(200,200) %>
-                <%= item.name %>
-              <% end %>
-              ￥<%= item.price.to_s(:delimited) %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="container mt-5">
-        <div class= "row">
-          <div class="mx-auto">
-            <%= paginate @items %>
-          </div>
-        </div>
-      </div>
+   <div class="row">
+   <% @items.each do |item| %>
+      <div class="card card-divdiv">
+       <%= link_to item_path(item.id) do %>
+       <%= image_tag item.item_image, class:"card-image" %>
+       <div class="card-body">
+       <%= item.name %>
+       </div>
+      <% end %>
+      ￥<%= item.price.to_s(:delimited) %>
+       </div>
+    <% end %>
+   </div>
 
-    </div>
-  </div>
-</div>
+  　<div class="container mt-5">
+  	 <div class= "row">
+      <div class="mx-auto">
+      <%= paginate @items %>
+       </div>
+        </div>
+         </div>
+         </div>

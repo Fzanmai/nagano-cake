@@ -13,10 +13,12 @@
               <h4><strong><%= @item.name %></strong></h4><br>
               <p><%= @item.introduction %></p><br>
               <p><strong>￥<%= @item.add_tax_price.to_s(:delimited) %>円</strong>(税込)</p><br>
-              <%= form_with model: @new_cart_item, url: cart_items_path, method: :post do |f| %>
-                <%= f.hidden_field :item_id, :value => @item.id %>
-                <p><%= f.select :quantity, *[1..10] %><p/>
-                <p><%= f.submit 'カートに入れる', class: " btn btn-success" %><p/>
+              <% if customer_signed_in? %>
+                <%= form_with model: @new_cart_item, url: cart_items_path, method: :post do |f| %>
+                  <%= f.hidden_field :item_id, :value => @item.id %>
+                  <p><%= f.select :quantity, *[1..10] %><p/>
+                  <p><%= f.submit 'カートに入れる', class: " btn btn-success" %><p/>
+                <% end %>
               <% end %>
               <p><%= link_to "商品一覧に戻る",items_path, class: "btn btn-outline-secondary" %></p>
             </div>

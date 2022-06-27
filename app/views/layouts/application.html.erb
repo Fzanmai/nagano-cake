@@ -24,17 +24,17 @@
               <% if customer_signed_in? %>
                 <li class="nav-item">
                   <%= link_to customer_path(current_customer), class: 'nav-link text-light' do %>
-                    <i class="fas fa-home"></i>マイページ
+                    <i class="fas fa-house-user"></i>マイページ
                   <%end%>
                 </li>
                 <li class="nav-item">
                   <%= link_to items_path, class: 'nav-link text-light' do %>
-                    <i class="fas fa-users"></i>商品一覧
+                    <i class="fas fa-cheese"></i>商品一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
                   <%= link_to cart_items_path, class: 'nav-link text-light' do  %>
-                    <i class="fas fa-book-open"></i>カート
+                    <i class="fas fa-shopping-cart"></i>カート
                   <%end%>
                 </li>
                 <li class="nav-item">
@@ -53,7 +53,7 @@
               <% elsif admin_signed_in? %>
                 <li class="nav-item">
                   <%= link_to admin_items_path, class: 'nav-link text-light' do  %>
-                    <i class="fas fa-home"></i>商品一覧
+                    <i class="fas fa-cheese"></i>商品一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
@@ -84,7 +84,7 @@
                 </li>
                 <li class="nav-item">
                   <%= link_to items_path, class: 'nav-link text-light' do  %>
-                    <i class="fas fa-home"></i>商品一覧
+                    <i class="fas fa-cheese"></i>商品一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
@@ -104,35 +104,35 @@
       </nav>
     </header>
 
-    <div class="mb-5">
+    <div class="yield">
     <%= yield %>
     </div>
 
-    <!--<footer class="footer shadow-sm fixed-bottom">-->
-    <!--  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
-    <!--    <div class="container">-->
-    <!--      <div>-->
-    <!--        <p class="text-muted">Nagano-cake.inc</p>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="container">-->
-    <!--      <div class="text-white">-->
-    <!--        <h6 class="font-weight-bold"><ガイド><h6>-->
-    <!--        <div class="p-1">< link_to "ホーム", root_path, class: 'nav-link text-light' %></div>-->
-    <!--        <div class="p-1">< link_to "アバウト", about_path, class: 'nav-link text-light' %></div>-->
-    <!--      </div>-->
-    <!--      <div class="text-white">-->
-    <!--        <h6 class="font-weight-bold"><コンテンツ></h6>-->
-    <!--        <div class="p-1">< link_to "マイページ", customer_path(current_customer.id), class: 'nav-link text-light' %></div>-->
-    <!--        <div class="p-1">< link_to "配送先一覧/登録", shipping_addresses_path, class: 'nav-link text-light' %></div>-->
-    <!--        <div class="p-1">< link_to "注文一覧", orders_path, class: 'nav-link text-light' %></div>-->
-    <!--      </div>-->
-    <!--      <div></div>-->
-    <!--      <div></div>-->
-    <!--    </div>-->
+    <footer class="footer shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <div>
+            <p class="text-muted">Nagano-cake.inc</p>
+          </div>
+        </div>
+        <div class="container">
+          <div class="text-white">
+            <h6 class="font-weight-bold"><ガイド><h6>
+            <div class="p-1"><%= link_to "ホーム", root_path, class: 'nav-link text-light' %></div>
+            <div class="p-1"><%= link_to "アバウト", about_path, class: 'nav-link text-light' %></div>
+          </div>
+          <div class="text-white">
+            <h6 class="font-weight-bold"><コンテンツ></h6>
+            <div class="p-1"><%= link_to "マイページ", customers_path, class: 'nav-link text-light' %></div>
+            <div class="p-1"><%= link_to "配送先一覧/登録", shipping_addresses_path, class: 'nav-link text-light' %></div>
+            <div class="p-1"><%= link_to "注文一覧", orders_path, class: 'nav-link text-light' %></div>
+          </div>
+          <div></div>
+          <div></div>
+        </div>
 
-    <!--  </nav>-->
-    <!--</footer>-->
+      </nav>
+    </footer>
 
   </body>
 </html>

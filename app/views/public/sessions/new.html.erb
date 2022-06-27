@@ -1,31 +1,39 @@
-<h2>ログイン</h2>
-<h4>会員の方はこちらからログイン</h4>
-<div class="customer">
-  <%= form_with model: @customer, url: customer_session_path do |f| %>
-　  <div class="form-group">
-      <label class="col-sm-3">メールアドレス</label>
-      <div class="col-sm-9">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3">パスワード</label>
-      <div class="col-sm-9">
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-    </div>
-    <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-    <% end %>
-    <div class="actions">
-      <%= f.submit "ログイン",class: "btn btn-info" %>
-    </div>
-  <% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-12 mt-5">
 
-  <h4>会員登録がお済みでない方</h4>
-  <p>
-    <%= link_to 'こちら', new_customer_registration_path %>  から新規登録を行ってください。
-  </p>
+    <h2>ログイン</h2>
+    <h4>会員の方はこちらからログイン</h4>
+    <div class="customer">
+      <%= form_with model: @customer, url: customer_session_path do |f| %>
+    　  <div class="form-group">
+          <label class="col-sm-3">メールアドレス</label>
+          <div class="col-sm-9">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3">パスワード</label>
+          <div class="col-sm-9">
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+        </div>
+        <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+        <% end %>
+        <div class="actions">
+          <%= f.submit "ログイン",class: "btn btn-info" %>
+        </div>
+      <% end %>
+
+      <h4>会員登録がお済みでない方</h4>
+      <p>
+        <%= link_to 'こちら', new_customer_registration_path %>  から新規登録を行ってください。
+      </p>
+
+      </div>
+    </div>
+  </div>

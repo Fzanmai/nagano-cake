@@ -15,7 +15,7 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <%= link_to "nagano-cake", root_path, class: 'nav-link text-light' %>
+          <%= link_to image_tag("logo.png"), root_path %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -23,22 +23,22 @@
             <ul class="navbar-nav ml-auto">
               <% if customer_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to customer_path(current_customer), class: 'nav-link text-light' do %>
-                    <i class="fas fa-house-user"></i>マイページ
+                  <%= link_to customer_path(current_customer), class: 'nav-link text-warning' do %>
+                    <i class="fas fa-home"></i>マイページ
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to items_path, class: 'nav-link text-light' do %>
-                    <i class="fas fa-cheese"></i>商品一覧
+                  <%= link_to items_path, class: 'nav-link text-warning' do %>
+                    <i class="fas fa-users"></i>商品一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to cart_items_path, class: 'nav-link text-light' do  %>
-                    <i class="fas fa-shopping-cart"></i>カート
+                  <%= link_to cart_items_path, class: 'nav-link text-warning' do  %>
+                    <i class="fas fa-book-open"></i>カート
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
+                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-warning' do %>
                     <i class="fas fa-sign-out-alt"></i>ログアウト
                   </li>
                 <%end%>
@@ -47,53 +47,54 @@
                     <%= f.text_field :word %>
                     <%= f.select :range, options_for_select([['Item']]) %>
                     <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
-                    <%= f.submit "検索", class: "btn btn-primary" %>
+                    <%= f.submit "検索", class: "btn btn-warning" %>
                   <% end %>
                 </li>
               <% elsif admin_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to admin_items_path, class: 'nav-link text-light' do  %>
-                    <i class="fas fa-cheese"></i>商品一覧
+                  <%= link_to admin_items_path, class: 'nav-link text-warning' do  %>
+                    <i class="fas fa-home"></i>商品一覧
+
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to admin_customers_path, class: 'nav-link text-light' do  %>
+                  <%= link_to admin_customers_path, class: 'nav-link text-warning' do  %>
                     <i class="fas fa-home"></i>会員一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to admin_orders_path, class: 'nav-link text-light' do  %>
+                  <%= link_to admin_orders_path, class: 'nav-link text-warning' do  %>
                     <i class="fas fa-home"></i>注文履歴一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to admin_item_genres_path, class: 'nav-link text-light' do  %>
+                  <%= link_to admin_item_genres_path, class: 'nav-link text-warning' do  %>
                     <i class="fas fa-home"></i>ジャンル一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-warning' do %>
                   <i class="fas fa-sign-out-alt"></i>ログアウト
                 </li>
                 <%end%>
               <% else %>
                 <li class="nav-item">
-                  <%= link_to about_path, class: 'nav-link text-light' do  %>
+                  <%= link_to about_path, class: 'nav-link text-warning' do  %>
                     <i class="fas fa-link"></i>About
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to items_path, class: 'nav-link text-light' do  %>
-                    <i class="fas fa-cheese"></i>商品一覧
+                  <%= link_to items_path, class: 'nav-link text-warning' do  %>
+                    <i class="fas fa-home"></i>商品一覧
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to new_customer_registration_path, class: 'nav-link text-light' do %>
+                  <%= link_to new_customer_registration_path, class: 'nav-link text-warning' do %>
                     <i class="fas fa-user-plus"></i>新規登録
                   <%end%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to new_customer_session_path, class: 'nav-link text-light' do %>
+                  <%= link_to new_customer_session_path, class: 'nav-link text-warning' do %>
                     <i class="fas fa-sign-in-alt"></i>ログイン
                   <% end %>
                 </li>
